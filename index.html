@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daily Stoicism | A stoic quote generator</title>
+  <title>Stoic Quote Generator</title>
   <link rel="icon" href="images/marcus.ico" type="image/x-icon">
   <style>
     body {
@@ -16,6 +16,33 @@
       background-color: #000;
       color: #fff;
       font-family: 'Times New Roman', Times, serif;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeIn 3s forwards;
+    }
+
+    @keyframes fadeIn {
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .star {
+      position: absolute;
+      background-color: white;
+      border-radius: 50%;
+      opacity: 0;
+      animation: twinkling 10s infinite;
+    }
+
+    @keyframes twinkling {
+      0%, 100% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
     }
 
     #quote-container {
@@ -23,18 +50,41 @@
       font-size: 36px;
       line-height: 1.5;
       margin: 0 50px;
+      text-shadow: 0 0 10px #fff;
     }
 
     #quote-text {
       margin-bottom: 10px;
+      color: #fff;
     }
 
     #quote-author {
       font-style: italic;
+      color: #fff;
     }
   </style>
 </head>
 <body>
+  <script>
+    function generateStars() {
+      const numStars = 1000;
+      const container = document.body;
+      
+      for (let i = 0; i < numStars; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.top = Math.random() * 100 + '%';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.width = Math.random() * 2 + 'px';
+        star.style.height = star.style.width;
+        star.style.animationDelay = Math.random() * 10 + 's';
+        container.appendChild(star);
+      }
+    }
+
+    generateStars();
+  </script>
+
   <div id="quote-container">
     <p id="quote-text"></p>
     <p id="quote-author"></p>
