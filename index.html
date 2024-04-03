@@ -1,8 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stoic Quote Generator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f2f2f2;
+    }
+
+    #quote-container {
+      text-align: center;
+      font-family: 'Times New Roman', Times, serif;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #quote-text {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    #quote-author {
+      font-style: italic;
+    }
+  </style>
 </head>
 <body>
-    <h1>Hello World!</h1>
+  <div id="quote-container">
+    <p id="quote-text"></p>
+    <p id="quote-author"></p>
+  </div>
+
+  <script>
+    function fetchQuote() {
+      fetch('https://stoic-quotes.com/api/quote')
+        .then(response => response.json())
+        .then(data => {
+          displayQuote(data.text, data.author);
+        })
+        .catch(error => {
+          console.error('Error fetching quote:', error);
+        });
+    }
+
+    function displayQuote(text, author) {
+      const quoteText = document.getElementById("quote-text");
+      const quoteAuthor = document.getElementById("quote-author");
+
+      quoteText.textContent = text;
+      quoteAuthor.textContent = `- ${author}`;
+    }
+      
+    function checkNewDayAndFetchQuote() {
+      const lastFetchDate = localStorage.getItem('lastFetchDate');
+      const currentDate = new Date().toLocaleDateString();
+
+      if (!lastFetchDate || lastFetchDate !== currentDate) {
+        localStorage.setItem('lastFetchDate', currentDate);
+        fetchQuote();
+      }
+    }
+
+    checkNewDayAndFetchQuote();
+  </script>
 </body>
 </html>
