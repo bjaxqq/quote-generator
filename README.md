@@ -4,7 +4,7 @@ A website to provide daily quotes from Stoicism's greatest authors such as Senec
 
 ## Screenshot
 
-<img align="left" src=".github/assets/quote.png" width="55%" height="55%" /></br></br></br></br></br></br></br></br>
+<img align="left" src=".github/assets/quote.png" width="55%" height="55%" /></br></br></br></br></br></br>
 
 ## Stoic Quotes API
 
